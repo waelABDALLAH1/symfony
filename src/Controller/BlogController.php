@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ObjectManager;
                                              
 
 class BlogController extends AbstractController
@@ -34,12 +35,21 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/new", name="blog_create")
      */
-    public function create(Request $request   ){
+    public function create(Request $request , ObjectManager $manager    ){
         
         $article=new Article(); 
-       
-       
-        return $this->render('blog/create.html.twig');
+
+        $form=$this->createFormBuilder($article)
+                   ->add('title')
+                   ->add('content')
+                   ->add('image')
+                   ->getForm();
+        
+        return $this->render('blog/create.html.twig', [
+            'formArticle'=> $form->createView()                                         
+
+
+        ]);
      
     }
 
