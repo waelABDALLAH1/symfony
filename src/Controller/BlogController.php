@@ -43,29 +43,29 @@ class BlogController extends AbstractController
             $article = new Article();
         }
 
-        $form=$this->createFormBuilder($article)
-                   ->add('title',TextType::class,[
-                    'attr' => [
-                        'placeholder' =>"titre",
-                    ]
-                   ] )
-                   ->add('content',TextType::class,[
-                    'attr' => [
-                        'placeholder' =>"contenu",
-                    ]
-                   ])
-                   ->add('image',TextType::class,[
-                    'attr' => [
-                        'placeholder' =>"L'URL de l'image",
-                    ]
-                   ])
-                   ->add('save ', SubmitType::class, [
-                    'label' =>'Enregistrer '
-                   ])
+        // $form=$this->createFormBuilder($article)
+        //            ->add('title',TextType::class,[
+        //             'attr' => [
+        //                 'placeholder' =>"titre",
+        //             ]
+        //            ] )
+        //            ->add('content',TextType::class,[
+        //             'attr' => [
+        //                 'placeholder' =>"contenu",
+        //             ]
+        //            ])
+        //            ->add('image',TextType::class,[
+        //             'attr' => [
+        //                 'placeholder' =>"L'URL de l'image",
+        //             ]
+        //            ])
+        //            ->add('save ', SubmitType::class, [
+        //             'label' =>'Enregistrer '
+        //            ])
                    
-                   ->getForm();
+        //            ->getForm();
 
-        //$form= $this->createForm(ArticleType::class, $article );
+        $form= $this->createForm(ArticleType::class, $article );
         $form->handleRequest($request);
 
 
