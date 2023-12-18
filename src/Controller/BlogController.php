@@ -35,10 +35,13 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/blog/new", name="blog_create")
+     * @Route("/blog/{id}/edit", name="blog_edit")
      */
-    public function create(Request $request , ObjectManager $manager    ){
+    public function form(Article $article = null  , Request $request , ObjectManager $manager    ){
         
-        $article=new Article(); 
+        if (!$article){
+            $article = new Article();
+        }
 
         $form=$this->createFormBuilder($article)
                    ->add('title',TextType::class,[
@@ -59,17 +62,17 @@ class BlogController extends AbstractController
                  
                     ]
                    ])
-                   ->add('save ', SubmitType::class, [
-                    'label' =>'Enregistrer '
-                   ])
+                   
                    ->getForm();
 
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
-            $article->setCreatedat( new \DaTeTime());
-
+            if(!$article->getId()){
+                $article->setCreatedat( new \DaTeTime());
+            }
+            
 
         $manager->persist($article);
         $manager->flush();
@@ -79,7 +82,8 @@ class BlogController extends AbstractController
         }
         
         return $this->render('blog/create.html.twig', [
-            'formArticle'=> $form->createView()                                         
+            'formArticle'=> $form->createView() ,
+            'editMode'=>  $article->getId() !== null                                        
 
 
         ]);

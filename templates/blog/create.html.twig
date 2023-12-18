@@ -10,5 +10,11 @@
 
 
 {{ form_end (formArticle)}}
-</form>
+<button type="submit" class ="btn btn-success">
+{% if editMode %}
+     enregistrer 
+{% else %}
+    Ajouter l'article 
+{% endif %}
+</button>
 {% endblock %} 
