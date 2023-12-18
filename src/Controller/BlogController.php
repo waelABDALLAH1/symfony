@@ -9,7 +9,7 @@ use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-                                             
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;                                           
 
 class BlogController extends AbstractController
 {
@@ -44,22 +44,39 @@ class BlogController extends AbstractController
                    ->add('title',TextType::class,[
                     'attr' => [
                         'placeholder' =>"titre",
-                        'class'=>'form-control'
+                   
                     ]
                    ] )
                    ->add('content',TextType::class,[
                     'attr' => [
                         'placeholder' =>"contenu",
-                        'class'=>'form-control'
+                 
                     ]
                    ])
                    ->add('image',TextType::class,[
                     'attr' => [
-                        'placeholder' =>"image",
-                        'class'=>'form-control'
+                        'placeholder' =>"L'URL de l'image",
+                 
                     ]
                    ])
+                   ->add('save ', SubmitType::class, [
+                    'label' =>'Enregistrer '
+                   ])
                    ->getForm();
+
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $article->setCreatedat( new \DaTeTime());
+
+
+        $manager->persist($article);
+        $manager->flush();
+
+        return $this->redirectToRoute('blog_show',['id' => $article->getId()]);
+
+        }
         
         return $this->render('blog/create.html.twig', [
             'formArticle'=> $form->createView()                                         
