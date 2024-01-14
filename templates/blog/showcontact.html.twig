@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Affichage des avis :</h2>
+
+        {% for singleContact in contact %}
+            <div class="contact-box" style="background-color: #f5f5f5; padding: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+                <h4>Username :</h4>
+                <p>{{ singleContact.username }}</p>
+
+                <h5>Message :</h5>
+                <p>{{ singleContact.message }}</p>
+            </div>
+
+            {# Ajoutez une séparation entre les contacts #}
+            <hr class="contact-separator">
+        {% endfor %}
+    </div>
+
