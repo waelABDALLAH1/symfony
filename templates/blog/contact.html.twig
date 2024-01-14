@@ -2,8 +2,16 @@
 
 
 
-{% block body %}
-    <h1>Contact us </h1>
+{% form_theme formContact 'bootstrap_4_layout.html.twig' %}
 
+{% block body %}
+    <h1>Contact</h1>
+
+    {{ form_start(formContact) }}
+    {{ form_widget(formContact) }}
+    {{ form_errors(formContact) }}
    
+
+    <button type="submit" class="btn btn-success">ENREGISTRER </button>
+     {{ form_end(formContact) }}
 {% endblock %}

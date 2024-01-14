@@ -6,11 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;                                           
 use App\Form\ArticleType;
+use App\Form\ContactType;
 class BlogController extends AbstractController
 {
     /**
@@ -95,9 +97,55 @@ class BlogController extends AbstractController
      /**
      * @Route("/blog/contact", name="blog_contact")
      */
-    public function contact(){
-        return $this->render('blog/contact.html.twig');
+    public function form1(Contact $contact = null  , Request $request , ObjectManager $manager    ){
+        
+        if (!$contact){
+            $contact = new Contact();
+        }
+
+        
+
+        $form= $this->createForm(ContactType::class, $contact );
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            
+
+            $manager->persist($contact);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_showContact');
+
+        }
+        
+        return $this->render('blog/contact.html.twig', [
+            'formContact'=> $form->createView()                    
+
+
+        ]);
+     
     }
+
+
+
+ 
+     /**
+     * @Route("/blog/showcontact", name="blog_showContact")
+     */
+     public function showcontact()
+     {
+     $repo = $this->getDoctrine()->getRepository(Contact::class);
+     $contact= $repo->findAll();
+
+     return $this->render('blog/showcontact.html.twig', [
+        'contact' => $contact,
+      ]);
+      }
+
+
+
+
 
 
     /**
