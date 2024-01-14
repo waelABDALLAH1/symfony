@@ -22,6 +22,7 @@ security:
                 check_path: app_login_check
             logout:
                 path: app_logout
+                target: /login
             anonymous: lazy
             provider: app_user_provider
             guard:
