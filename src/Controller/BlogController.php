@@ -35,7 +35,7 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/blog/new", name="blog_create")
-     * @Route("/blog/{id}/edit", name="blog_edit")
+     * @Route("/blog/{id}/edit", name="bloc_create")
      */
     public function form(Article $article = null  , Request $request , ObjectManager $manager    ){
         
@@ -104,4 +104,7 @@ class BlogController extends AbstractController
     }
     
     
+    
 }
+
+
