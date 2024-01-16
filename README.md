@@ -49,3 +49,21 @@ Le projet sera accessible à l'adresse http://localhost:8000.
 3. **Formulaire de Contact :** Les visiteurs peuvent soumettre des formulaires de contact.
 4. **Gestion des Messages :** Les administrateurs peuvent lire et gérer les messages soumis par les visiteurs.
 
+## Configuration Additionnelle
+
+- Pour des informations supplémentaires sur la configuration, consultez le fichier `config/packages/`.
+- Consultez la documentation Symfony pour des détails spécifiques : [Symfony Documentation](https://symfony.com/doc/current/index.html).
+
+## Problèmes Connus
+
+Aucun problème majeur n'est actuellement répertorié. N'hésitez pas à soumettre un problème si vous en rencontrez un.
+
+## Contributions
+
+Les contributions sont les bienvenues! Si vous souhaitez contribuer, veuillez créer une demande de tirage (pull request) avec une description détaillée des changements.
+
+## Licence
+
+Ce projet est sous licence [MIT](LICENSE).
+
+
